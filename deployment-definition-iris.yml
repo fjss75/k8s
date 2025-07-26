@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+
+metadata:
+  name: iris-deployment
+  labels:
+    app: iris
+
+spec:
+  template:
+    metadata:
+      name: iris-pod
+      labels:
+        app: iris
+    
+    spec:
+      containers:
+        - name: iris-container
+          image: fjsoto/iris_model:v2
+          ports:
+            - containerPort: 5002
+
+  replicas: 6
+  selector:
+    matchLabels:
+      app: iris
+  
+  strategy:
+    type: RollingUpdate

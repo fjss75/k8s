@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: ReplicaSet
+
+metadata:
+  name: iris-replicaset
+  labels:
+    app: iris
+
+spec:
+  template:
+    metadata:
+      name: iris-pod
+      labels:
+        app: iris
+
+    spec:
+      containers:
+        - name: iris-container
+          image: fjsoto/iris_model:v2
+          ports:
+            - containerPort: 5002     
+  
+  replicas: 3
+  selector:
+    matchLabels:
+      app: iris
